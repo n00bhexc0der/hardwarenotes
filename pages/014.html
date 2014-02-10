@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>H & N</title>
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/style.css' />
+<script type="text/javascript" src="../nav/nav2.js"></script>
+<script type="text/javascript" src="../nav/prototype.lite.js"></script>
+<script type="text/javascript" src="../nav/moo.fx.js"></script>
+<script type="text/javascript" src="../nav/training_menu.js"></script>
+</head>
+<body>
+<!-- START NAVIGATION -->
+<div id="masthead">
+
+
+<h2>Part 14 (Client Side Exploits)</h2>
+
+<p>
+In this video, we will explore the fun world of client side exploits. Till now we have seen how we can exploit server side vulnerabilities with Metasploit. These are great! but what if the host we want to exploit is firewalled for all incoming connections? or behind a NAT? in such case, we will not be able to access the service remotely from the Internet and exploit it. This is where client side exploit comes in! using these we will lure the client to use an application such as a web browser (which is not patched) and view a resource such a web page created by us. This web page would contain an exploit which would help us break into the client and then use a reverse connect payload to connect back to us. 
+The advantage we have with client side exploitation is that (1) we are targeting client side software which is typically more vulnerable in todays world than OS software (2) the victim connects to us, hence we do not have to worry about inbound firewall rules, NAT etc. (3) the reverse connect payload ensures that we do not have to bother about network issues mentioned in 2.
+
+<br/> <br/>
+<div align="center">
+        <!-- START OF THE PLAYER EMBEDDING TO COPY-PASTE -->
+        <div id="mediaplayer" >Video Player should be visible here. If not, install / upgrade flash</div>
+        <script type="text/javascript" src="../swf/jwplayer.js"></script>
+        <script type="text/javascript">
+                jwplayer("mediaplayer").setup({
+                        flashplayer: "../swf/player.swf",
+                        file: "../videos/14.m4v",
+			autostart: "false",
+                });
+        </script>
+        <!-- END OF THE PLAYER EMBEDDING -->
+</div>
+
+</p>
+<br/><br/>
+
+
+
+</p>
+
+
+
+</div>
+</body>
+</html>

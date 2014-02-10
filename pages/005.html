@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>H & N</title>
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/style.css' />
+<script type="text/javascript" src="../nav/nav2.js"></script>
+<script type="text/javascript" src="../nav/prototype.lite.js"></script>
+<script type="text/javascript" src="../nav/moo.fx.js"></script>
+<script type="text/javascript" src="../nav/training_menu.js"></script>
+</head>
+<body>
+<!-- START NAVIGATION -->
+<div id="masthead">
+
+<h3 style="font-family:Adobe Fangsong Std R;color:#00008B;font-size:17px;">How does a computer work?</h3>
+<p>This document has been created to give you a better understanding of how the personal computer works and what it does each time you press the power button.</p>
+<h3 style="font-family:Adobe Fangsong Std R;color:#00008B;font-size:17px;">Powering on the computer</h3>
+<p>When you first press the power button the computer sends a signal to the computer power supply, which converts the alternating current (AC) into a direct current (DC) to supply the computer and its components with the proper amount of voltage and electricity.
+Once the computer and its components have received ample power and the power supply reports no errors it sends a signal (using transistors) to the motherboard and the computer processor (CPU). While this is happening, the processor will clear any leftover data in the memory registers and give the CPU program counter a F000 hexadecimal number. This number is the location of the first instruction and tells the CPU that it's ready to process the instructions contained in the basic input/output system (BIOS).</p>
+<h3 style="font-family:Adobe Fangsong Std R;color:#00008B;font-size:17px;">BIOS and the POST</h3>
+<p>When the computer first looks at the BIOS, it begins the power-on self-test (POST) sequence to make sure the components in the computer are present and functioning properly. If the computer does not pass any of these tests, it will encounter an irregular POST. An irregular POST is a beep code that is different from the standard one or two beeps. For example, an irregular POST could generate no beeps at all or a combination of different beeps to indicate the cause of the failure.</p>
+<p>If the computer passes the initial POST, it will next look at the first 64-bytes of memory located in the complementary metal oxide semiconductor (CMOS) chip, which is kept alive by the CMOS battery even when the computer is turned off. This chip contains information such as the system time and date and information about all the hardware installed in your computer.</p>
+<p>After loading the CMOS information, the POST will begin inspecting and comparing the system settings with what is installed in the computer. If no errors are found it will then load the basic device drivers and interrupt handlers for hardware such as the hard drive, keyboard, mouse, floppy drive. These basic drivers allow the CPU to communicate with these hardware devices and allow the computer to continue its boot process.</p>
+<p>Next, the POST will check the real-time clock (RTC) or system timer and the computer system bus to make sure both of these are properly working on the computer. Finally, you'll get a picture on your display after the POST has loaded the memory contained on the display adapter and has made it part of the overall system BIOS.</p>
+<p>Next, the BIOS will check to see if it's currently performing a cold boot or warm boot (reboot) by looking at the memory address 0000:0472, if it sees 1234h the BIOS knows that this is a reboot and will skip the remainder of the POST steps.</p>
+<p>If 1234h is not seen, the BIOS knows that this is a cold boot and will continue running additional POST steps. Next, it tests the computer memory (RAM) installed in the computer by writing to each chip. With many computers, you'll know it's performing this step if you see the computer counting the total installed memory as it's booting.</p>
+<p>Finally, the POST will send signals to the computer floppy, optical, and hard drive to test these drives. If all drives pass the test, the POST is complete and instruct the computer to start the process of loading the operating system.</p>
+<h3 style="font-family:Adobe Fangsong Std R;color:#00008B;font-size:17px;">Booting the operating system</h3>
+<p>After the computer has passed the POST, the computer will start the boot process. This process is what loads the operating system and all of it's associated files. Because Microsoft Windows is the most commonly used operating system, this section will cover the process of loading Microsoft Windows.</p>
+<p>The BIOS first hands control over to the bootstrap loader, which looks at the boot sector of the hard drive. If your boot sequence in CMOS setup is not setup to look at the hard drive first, it may look at the boot sector on any inserted floppy disk drive or optical disc first before doing this.</p>
+<p>In this example, the Microsoft Windows XP NT Loader (NTLDR) is found on the boot sector and tells the computer where to find the remaining code on the hard drive. Next, Windows loads the ntdetect.com file, which displays the Windows splash screen and loads the Windows registry. After loading the registry, Windows begins to load dozens of low-level programs that make up the operating system into memory. Many of the initially loaded programs are what allow Windows to communicate with the essential hardware and other programs running on the computer.</p>
+<p>After the registry has loaded the initial basic hardware devices, it begins to load Plug and Play devices, PCI, and ISA devices. After loading all these devices, Windows then moves to loading full support of the hard drive, partitions, and any other disk drives and then moves to all other drivers that have been installed.</p>
+<p>Finally, after successfully completing the above steps any additional required services are loaded and Windows starts.</p>
+<h3 style="font-family:Adobe Fangsong Std R;color:#00008B;font-size:17px;">Hardware devices communicating with the computer</h3>
+<p>After the computer has loaded the operating system, hardware attached to the computer must be able to communicate with the CPU. Hardware communication is done by using an interrupt request (IRQ). Each time a hardware device needs the attention of the computer the interrupt controller sends the request (INTR) to the CPU so it temporarily stop what it is doing to process the request of the hardware device. Anything that was being currently done by the CPU is put on hold and stored as a memory address in the memory stack and is returned to after the interrupt request is processed.</p>
+<h3 style="font-family:Adobe Fangsong Std R;color:#00008B;font-size:17px;">INTERRUPTS, DMA's AND IRQS</h3>
+<p>An interrupt is just like it says, it interrupt's something. I'll give you an example of how it works. Say your in school and your teacher is giving a lecture and somebody raises their hand and the teacher stops the lecture and asks the student what his question is. That is just like a computer interrupt. Lets say that you were connected to the internet. You type in a URL to go to www.yahoo.com and your modem sends out the data to all those DNS servers and then when a DNS server finds the address www.yahoo.com it will send back the information to the modem. Well the modem cant hold all of that info and has to send it to the memory so the modem can get some more info. But first it has to get the attention of the CPU so the CPU can put the info into the memory. So it uses it's interrupt to do this. It sends out a signal saying &quot;hey I need you&quot; (not really but close enough) and the computer sends back to the modem &quot;go ahead and tell me what you need&quot; and then the modem asks where it can store it's info in memory and then the CPU gives it the address to store the info at. Then the modem sends info to the memory using DMA. (direct memory access) DMA means that it can access the memory directly without having to go through the CPU. But sometimes it might have to go to the CPU once just to know where to put the info it has into memory then it can access the memory without any help. So now you know what an interrupt is and what DMA is, but what is an irq? An irq is the order of interrupt assignments in which the accer in. On older computers their was only 8 interrupts</p>
+<ul>
+<li>0) available</li>
+<li>1) sound/available</li>
+<li>2) floppy disk controller</li>
+<li>3) available</li>
+<li>4) first DMA Controller</li>
+<li>5) sound/available</li>
+<li>6) available</li>
+<li>7) available<br>
+</li>
+</ul>
+<p>so 0, being the first interrupt and 7 being the last. Now on the newer computer's there is currently 16 irq's. </p>
+<ul>
+<li>1) system timer</li>
+<li>2) Keyboard controller</li>
+<li>8) Real-time clock</li>
+<li>9) Available </li>
+<li>10) Available</li>
+<li>11) Available</li>
+<li>12) Motherboard mouse port/available</li>
+<li>13) Math coprocessor/available</li>
+<li>14) Primary IDE</li>
+<li>15) Secondary IDE/available </li>
+<li>3) Serial port 2</li>
+<li>4) Serial port 1</li>
+<li>5) Sound/parallel port 2</li>
+<li>6) Floppy disk controller</li>
+<li>7) Parallel port 1<br>
+</li>
+</ul>
+<p> This might look out of order but this is the way they come in. I'll explain what this means and how it works now. Lets say you were moving your mouse. Your mouse is irq number 12. Every time you move your mouse it sends out an interrupt 12 to your CPU and says, I need u! Then the CPU will reply back &quot;what do you need&quot; and then the mouse will say, &quot;where am I on the screen and the CPU will tell it &quot;you in position dah dah dah.&quot; That's how the irq works, well lets say that your moving your mouse while using your serial port 2. Your mouse has priority over your serial port 2 because your mouse comes first on your irq list. So when your sitting their just swishing your mouse around making a figure eight on your computer, you could be interrupting a function that your computer is doing and it will slow it down a tad.</p>
+<p></br></br><CENTER><a href="../documents/ppt/How PC Works.pptx">How PC Works.pptx</a> Click Here To Download...</CENTER>
+</br><CENTER><a href="../documents/doc/How Pc Works.docx">How PC Works.docx</a> Click Here To Download...</CENTER>
+</br><CENTER><a href="../documents/pdf/How Pc Works.pdf">How PC Works.ppt</a> Click Here To Download...</CENTER></br></br></br></p>
+</body>
+</html>
